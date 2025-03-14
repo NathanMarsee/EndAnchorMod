@@ -94,7 +94,7 @@ public class EndAnchorBlock extends BlockWithEntity implements InventoryProvider
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof EndArchorBlockEntity blockEntity && !world.isClient()) {
-            if (player.getStackInHand(hand).getItem() == Items.END_CRYSTAL && !world.getBlockState(pos).get(CHARGED)) {
+            if (player.getStackInHand(hand).getItem() == Items.ENDER_PEARL && !world.getBlockState(pos).get(CHARGED)) {
                 if (!player.getAbilities().creativeMode)
                     player.getStackInHand(hand).decrement(1);
                 EndAnchorBlock.setCharged(world, pos, true);
@@ -221,7 +221,7 @@ public class EndAnchorBlock extends BlockWithEntity implements InventoryProvider
         @Override
         public void markDirty() {
             super.markDirty();
-            if(this.getStack(0).getItem() == Items.END_CRYSTAL) {
+            if(this.getStack(0).getItem() == Items.ENDER_PEARL) {
                 blockState = blockState.with(CHARGED, true);
                 dirty = true;
                 EndAnchorBlock.setCharged((World) world, pos, true);
@@ -235,7 +235,7 @@ public class EndAnchorBlock extends BlockWithEntity implements InventoryProvider
 
         @Override
         public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-            return !this.dirty && stack.getItem() == Items.END_CRYSTAL && !blockState.get(CHARGED);
+            return !this.dirty && stack.getItem() == Items.ENDER_PEARL && !blockState.get(CHARGED);
         }
 
         @Override
